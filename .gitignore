@@ -5,4 +5,4 @@ assets/*
 *.gz
 *.swp
 *.swo
-runtime/*
+protected/runtime/*
