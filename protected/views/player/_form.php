@@ -15,6 +15,12 @@
 		<?php echo $form->error($model,'name'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'email'); ?>
+		<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'email'); ?>
+	</div>
+
     <?php if( ! $model->isNewRecord ) : ?>
     <div class="row">
         <div>
@@ -23,13 +29,13 @@
     </div>
     <?php endif; ?>
 
-<?php /*
 	<div class="row">
 		<?php echo $form->labelEx($model,'photo'); ?>
 		<?php echo $form->textField($model,'photo',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'photo'); ?>
 	</div>
 
+<?php /*
 	<div class="row">
 		<?php echo $form->labelEx($model,'score'); ?>
 		<?php echo $form->textField($model,'score'); ?>

@@ -12,8 +12,12 @@
 	<?php echo CHtml::encode($data->photo); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('score')); ?>:</b>
-	<?php echo CHtml::encode($data->score); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('won')); ?>:</b>
+	<?php echo CHtml::encode($data->won); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('lost')); ?>:</b>
+	<?php echo CHtml::encode($data->lost); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('created')); ?>:</b>

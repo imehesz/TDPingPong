@@ -21,8 +21,13 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'score'); ?>
-		<?php echo $form->textField($model,'score'); ?>
+		<?php echo $form->label($model,'won'); ?>
+		<?php echo $form->textField($model,'won'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'lost'); ?>
+		<?php echo $form->textField($model,'lost'); ?>
 	</div>
 
 	<div class="row">

@@ -6,8 +6,10 @@
  * The followings are the available columns in table 'players':
  * @property integer $id
  * @property string $name
+ * @property string $email
  * @property string $photo
- * @property integer $score
+ * @property integer $won
+ * @property integer $lost
  * @property integer $created
  * @property integer $updated
  *
@@ -40,13 +42,12 @@ class Player extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-            array( 'name', 'required' ),
-            array( 'name', 'unique' ),
-			array('score, created, updated', 'numerical', 'integerOnly'=>true),
-			array('name, photo', 'length', 'max'=>255),
+            array( 'name,email', 'required' ),
+			array('won, lost, created, updated', 'numerical', 'integerOnly'=>true),
+			array('name, email, photo', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, photo, score, created, updated', 'safe', 'on'=>'search'),
+			array('id, name, email, photo, won, lost, created, updated', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,8 +70,10 @@ class Player extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Name',
+			'email' => 'Email',
 			'photo' => 'Photo',
-			'score' => 'Score',
+			'won' => 'Won',
+			'lost' => 'Lost',
 			'created' => 'Created',
 			'updated' => 'Updated',
 		);
@@ -89,8 +92,10 @@ class Player extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
+		$criteria->compare('email',$this->email,true);
 		$criteria->compare('photo',$this->photo,true);
-		$criteria->compare('score',$this->score);
+		$criteria->compare('won',$this->won);
+		$criteria->compare('lost',$this->lost);
 		$criteria->compare('created',$this->created);
 		$criteria->compare('updated',$this->updated);
 
@@ -98,4 +103,22 @@ class Player extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+    public function beforeSave()
+    {
+        $timestamp = time();
+        
+        if( $this->isNewRecord )
+        {
+            $this->created = $timestamp;
+        }
+
+        $this->updated = $timestamp;
+
+        if ( ! is_numeric( $this->won ) )   { $this->won    = 0;  }
+        if ( ! is_numeric( $this->lost ) )  { $this->lost   = 0;  }
+
+        // code...
+        return parent::beforeSave();
+    }
 }
