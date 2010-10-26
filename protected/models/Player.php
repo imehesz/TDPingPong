@@ -121,4 +121,19 @@ class Player extends CActiveRecord
         // code...
         return parent::beforeSave();
     }
+
+    public function getPlayerList()
+    {
+        $players = $this->findAll( 'created <> 0 ORDER BY name' );
+
+        $retval = array();
+
+        foreach( $players as $player )
+        {
+            $retval[$player->id] = $player->name; 
+        }
+
+        return $retval;
+        // code...
+    }
 }

@@ -15,17 +15,19 @@
 		<?php echo $form->error($model,'name'); ?>
 	</div>
 
-	<div class="row">
+    <div class="row">
 		<?php echo $form->labelEx($model,'players_home'); ?>
-		<?php echo $form->textField($model,'players_home',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'players_home'); ?>
-	</div>
+        <?php echo CHtml::activeListBox( $model, 'players_home', Player::model()->getPlayerList(), array( 'multiple' => true, 'size' => 10 ) ); ?>
+    </div>
 
-	<div class="row">
+    <div class="row">
 		<?php echo $form->labelEx($model,'players_visitor'); ?>
-		<?php echo $form->textField($model,'players_visitor',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'players_visitor'); ?>
-	</div>
+        <?php echo CHtml::activeListBox( $model, 'players_visitor', Player::model()->getPlayerList(), array( 'multiple' => true, 'size' => 10 ) ); ?>
+    </div>
+
+
+    <?php echo $form->hiddenField($model,'players_home',array('size'=>60,'maxlength'=>255)); ?>
+	<?php echo $form->hiddenField($model,'players_visitor',array('size'=>60,'maxlength'=>255)); ?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'score_home'); ?>
@@ -43,12 +45,6 @@
 		<?php echo $form->labelEx($model,'details'); ?>
 		<?php echo $form->textArea($model,'details',array('rows'=>6, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'details'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'created'); ?>
-		<?php echo $form->textField($model,'created'); ?>
-		<?php echo $form->error($model,'created'); ?>
 	</div>
 
 	<div class="row buttons">
