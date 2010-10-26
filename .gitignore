@@ -1,0 +1,8 @@
+assets/*
+*.sqlite
+*.db
+*.zip
+*.gz
+*.swp
+*.swo
+runtime/*
