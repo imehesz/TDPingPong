@@ -17,6 +17,8 @@
  */
 class Game extends CActiveRecord
 {
+	public $selection_home;
+	public $selection_visitor;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Game the static model class
@@ -42,12 +44,14 @@ class Game extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array( 'name', 'required' ),
 			array('score_home, score_visitor, created', 'numerical', 'integerOnly'=>true),
 			array('name, players_home, players_visitor', 'length', 'max'=>255),
 			array('details', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, name, players_home, players_visitor, score_home, score_visitor, details, created', 'safe', 'on'=>'search'),
+			array('selection_home,selection_visitor', 'safe' ),
 		);
 	}
 
@@ -102,5 +106,80 @@ class Game extends CActiveRecord
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	/**
+	 *
+	 */
+	public function beforeValidate()
+	{
+		// TODO we have to make sure that all the players are real, before saving anything ...
+		if( is_array( $this->selection_home ) )
+		{
+			$this->players_home 	=  implode( ',', $this->selection_home );
+
+			// we have to update the team members' WIN column
+			foreach( $this->selection_home as $home_player_id )
+			{
+				$player = Player::model()->findByPk( $home_player_id );
+				if( $player )
+				{
+					if( (int)$this->score_home > (int)$this->score_visitor )
+					{
+						$player->won = $player->won+1;
+					}
+					elseif( (int)$this->score_home < (int)$this->score_visitor )
+					{
+						$player->lost = $player->lost+1;
+					}
+
+					$player->save( false );
+				}
+			}
+		}
+		else
+		{
+			$this->addError( 'selection_home', 'Select at least 1 player from the HOME team' );
+		}
+
+		if( is_array( $this->selection_visitor ) )
+		{
+			$this->players_visitor 	=  implode( ',', $this->selection_visitor );
+
+			// we have to update the team members' WIN column
+			foreach( $this->selection_visitor as $visitor_player_id )
+			{
+				$player = Player::model()->findByPk( $visitor_player_id );
+				if( $player )
+				{
+					if( (int)$this->score_visitor > (int)$this->score_home )
+					{
+						$player->won = $player->won+1;
+					}
+					elseif( (int)$this->score_visitor < (int)$this->score_home )
+					{
+						$player->lost = $player->lost+1;
+					}
+					$player->save( false );
+				}
+			}
+		}
+		else
+		{
+			$this->addError( 'selection_visitor', 'Select at least 1 player from the VISITOR team' );
+		}
+
+
+		return parent::beforeValidate();
+	}
+
+	public function beforeSave()
+	{
+		if( $this->isNewRecord )
+		{
+			$this->created = time();
+		}
+
+		return parent::beforeSave();
 	}
 }
