@@ -6,3 +6,4 @@ assets/*
 *.swp
 *.swo
 protected/runtime/*
+tmp/*

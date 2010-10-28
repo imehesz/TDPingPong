@@ -13,6 +13,7 @@
 
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/main.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/form.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/table.css" />
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
@@ -48,7 +49,7 @@
 		All Rights Reserved.<br/>
 		<?php echo Yii::powered(); ?>
         <div style="margin-top:10px;">
-            <?php echo CHtml::link( CHtml::image( 'http://tampadigital.com/img/tampadig_logo.jpg', 'Tampa Digital - Let\'s Think Together' ), 'http://tampadigital.com' ); ?>
+            <?php //echo CHtml::link( CHtml::image( 'http://tampadigital.com/img/tampadig_logo.jpg', 'Tampa Digital - Let\'s Think Together' ), 'http://tampadigital.com' ); ?>
         </div>
 	</div><!-- footer -->
 

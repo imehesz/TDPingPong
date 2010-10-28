@@ -22,10 +22,10 @@
 	<h3 class="text-center">Stats</h3>
 	<div>
 		<div style="width:150px;float:left;">
-			<table>
+			<table id="hor-minimalist-b">
 				<thead>
 					<tr>
-						<th colspan="3" align="right">Top 10</th>
+						<th colspan="3" align="center" style="text-align:center;">Top 10</th>
 					</tr>
 					<tr>
 						<th>Pos.</th>
@@ -39,34 +39,75 @@
 						<tr>
 							<td><?php echo $pos > 3 ? $pos : '<span style="font-weight:bolder;">' . $pos  . '</span>'; ?>. </td>
 							<td><?php echo $pos > 3 ? $player->name : "<span style='font-weight:bolder;'>{$player->name}</span>"; ?></td>
-							<td><?php echo $player->won > 0 ? $player->won . ' (' . round(($player->won / ($player->won+$player->lost))*100 ) . '%)' : $player->won; ?></td>
+							<td align="right" style="text-align:right;"><?php echo $player->won > 0 ? $player->won . ' (' . round(($player->won / ($player->won+$player->lost))*100 ) . '%)' : $player->won; ?></td>
 						</tr>
 					<?php $pos++; endforeach; ?>
 				</tbody>
 			</table>
 		</div>
  		<div style="width:150px;float:left;margin-left:50px;">
-			<table>
+			<table id="hor-minimalist-b">
 				<thead>
 					<tr>
-						<th colspan="2" align="right">Games</th>
+						<th colspan="2" align="right" style="text-align:center;">Games</th>
 					</tr>
 				</thead>
 				<tbody>
 						<tr>
                             <td>Games played</td>
-                            <td><?php echo sizeof( Game::model()->findAll() ); ?></td>
+                            <td style="text-align:right;"><?php echo sizeof( Game::model()->findAll() ); ?></td>
 						</tr>
                         <tr>
                             <td>Last game</td>
-                            <td>
+                            <td style="text-align:right;">
                                 <?php 
                                     $lastgame_played = Game::model()->find( 'created <> 0 ORDER BY created DESC' )->created; 
-                                    echo $lastgame_played ? date( 'm/d/Y', $lastgame_played ) : 'n/a';
+                                    echo $lastgame_played || 1==1 ? date( 'F, d', time() + $lastgame_played ) : 'n/a';
                                 ?>
                             </td>
                         </tr>
+                        <tr><td></td></tr>
 				</tbody>
+				<thead>
+					<tr>
+						<th colspan="2" align="right" style="text-align:center;">Players</th>
+					</tr>
+				</thead>
+                <tbody>
+                        <tr>
+                            <td>Number of Players</td>
+                            <td style="text-align:right;"><?php echo sizeof( Player::model()->findAll( 'created<>0' ) ); ?></td>
+                        </tr>
+                        <tr>
+                            <td>Home Score (Sum)</td>
+                            <td style="text-align:right;">
+                                <?php // echo (int)Game::model()->with('homeScore')->findAll()->homeScore; 
+                                    // TODO make this better, Yii like :/
+                                    $score = 0;
+                                    foreach( Game::model()->findAll('created<>0') as $game )
+                                    {
+                                        $score += $game->score_home;
+                                    }
+                                    echo $score;
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Visitor Score (Sum)</td>
+                            <td style="text-align:right;">
+                                <?php
+                                    //echo Game::model()->with('visitorScore')->findAll()->visitorScore;
+                                    $score = 0;
+                                    // TODO bad code, FIX it
+                                    foreach( Game::model()->findAll('created<>0') as $game )
+                                    {
+                                        $score += $game->score_visitor;
+                                    }
+                                    echo $score;
+                                ?>
+                            </td>
+                        </tr>
+                </tbody>
 			</table>
 		</div>
        
