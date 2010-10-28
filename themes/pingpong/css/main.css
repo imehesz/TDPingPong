@@ -7,6 +7,28 @@ body
 	background: #EFEFEF;
 }
 
+.front-block, .front-top-block
+{
+	width: 425px;
+	float:left;
+	height:250px;
+	border: 1px solid #ddd;
+	padding: 5px;
+	margin: 5px 5px;
+	overflow: hidden;
+}
+
+.front-top-block
+{
+	height: 225px;
+	line-height: 25px;
+}
+
+.front-top-block p
+{
+	font-size: 16px;
+}
+
 #page
 {
 	margin-top: 5px;
@@ -27,6 +49,11 @@ body
 #content
 {
     padding: 20px;
+}
+
+.text-center
+{
+	text-align: center;
 }
 
 #sidebar
