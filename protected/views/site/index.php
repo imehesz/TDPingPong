@@ -21,7 +21,7 @@
 <div class="front-block">
 	<h3 class="text-center">Stats</h3>
 	<div>
-		<div style="width:150px;">
+		<div style="width:150px;float:left;">
 			<table>
 				<thead>
 					<tr>
@@ -45,6 +45,31 @@
 				</tbody>
 			</table>
 		</div>
+ 		<div style="width:150px;float:left;margin-left:50px;">
+			<table>
+				<thead>
+					<tr>
+						<th colspan="2" align="right">Games</th>
+					</tr>
+				</thead>
+				<tbody>
+						<tr>
+                            <td>Games played</td>
+                            <td><?php echo sizeof( Game::model()->findAll() ); ?></td>
+						</tr>
+                        <tr>
+                            <td>Last game</td>
+                            <td>
+                                <?php 
+                                    $lastgame_played = Game::model()->find( 'created <> 0 ORDER BY created DESC' )->created; 
+                                    echo $lastgame_played ? date( 'm/d/Y', $lastgame_played ) : 'n/a';
+                                ?>
+                            </td>
+                        </tr>
+				</tbody>
+			</table>
+		</div>
+       
 	</div>
 </div>
 
