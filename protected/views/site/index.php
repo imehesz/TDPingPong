@@ -25,12 +25,12 @@
 			<table id="hor-minimalist-b">
 				<thead>
 					<tr>
-						<th colspan="3" align="center" style="text-align:center;">Top 10</th>
+						<th colspan="4" align="center" style="text-align:center;">Top 10</th>
 					</tr>
 					<tr>
 						<th>Pos.</th>
 						<th>Name</th>
-						<th>Win</th>
+						<th colspan="2">Wins</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -39,13 +39,27 @@
 						<tr>
 							<td><?php echo $pos > 3 ? $pos : '<span style="font-weight:bolder;">' . $pos  . '</span>'; ?>. </td>
 							<td><?php echo $pos > 3 ? $player->name : "<span style='font-weight:bolder;'>{$player->name}</span>"; ?></td>
-							<td align="right" style="text-align:right;"><?php echo $player->won > 0 ? $player->won . ' (' . round(($player->won / ($player->won+$player->lost))*100 ) . '%)' : $player->won; ?></td>
+							<td align="right" style="text-align:right;">
+                                <?php 
+                                    if( $pos > 3 )
+                                    {
+                                        echo $player->won > 0 ? $player->won : 0; 
+                                    }
+                                    else
+                                    {
+                                        echo $player->won > 0 ? '<span style="font-weight:bolder;">' . $player->won . '</span>' : 0; 
+                                    }
+                                ?>
+                            </td>
+                            <td>
+                                <?php echo $player->won > 0 ? round(($player->won / ($player->won+$player->lost))*100 ) . '%' : ''; ?>
+                            </td>
 						</tr>
 					<?php $pos++; endforeach; ?>
 				</tbody>
 			</table>
 		</div>
- 		<div style="width:150px;float:left;margin-left:50px;">
+ 		<div style="width:145px;float:left;margin-left:50px;">
 			<table id="hor-minimalist-b">
 				<thead>
 					<tr>
@@ -137,7 +151,19 @@
 </div>
 
 <div class="front-block">
-	<h3 class="text-center">Coming Soon</h3>
-	<img src="http://www.djelectricnoiz.net/images/under_construction.png" />
+	<h3 class="text-center">Ads (for now)</h3>
+    <div class="text-center">
+        <script type="text/javascript"><!--
+        google_ad_client = "pub-1319358860215477";
+        /* ad on TD Ping Pong */
+        google_ad_slot = "5091684225";
+        google_ad_width = 336;
+        google_ad_height = 280;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+    </div>
 </div>
 
