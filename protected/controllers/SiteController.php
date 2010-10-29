@@ -29,7 +29,48 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+
+		// we need to get some stats here
+		// ie: last game played
+        $lastgame_played = Game::model()->find( 'created <> 0 ORDER BY created DESC' );
+
+		// the home team of the last game
+		$home_team = array();
+		if( $lastgame_played )
+		{
+			$home_team_array = explode( ',', $lastgame_played->players_home );
+			foreach( $home_team_array as $key => $playerID )
+			{
+				$member = Player::model()->findByPk( $playerID );
+				if( $member )
+				{
+					$home_team[] = $member->name;
+				}
+			}
+		}
+
+		// the home team of the last game
+		$visitor_team = array();
+		if( $lastgame_played )
+		{
+			$visitor_team_array = explode( ',', $lastgame_played->players_visitor );
+			foreach( $visitor_team_array as $key => $playerID )
+			{
+				$member = Player::model()->findByPk( $playerID );
+				if( $member )
+				{
+					$visitor_team[] = $member->name;
+				}
+			}
+		}
+
+		$this->render('index', 
+						array(
+							'lastgame_played'		=> $lastgame_played,
+							'home_team'				=> $home_team,
+							'visitor_team'			=> $visitor_team,
+						) 
+					);
 	}
 
 	/**

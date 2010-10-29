@@ -49,20 +49,42 @@
 			<table id="hor-minimalist-b">
 				<thead>
 					<tr>
-						<th colspan="2" align="right" style="text-align:center;">Games</th>
+						<th colspan="4" align="right" style="text-align:center;">Last Game</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="background-color:#ffc;">
+							<?php foreach( $home_team as $key => $player_name ) : ?>
+								<div><?php echo $player_name; ?></div>
+							<?php endforeach; ?>
+						</td> 
+						<td style="background-color:#ffc;"><h3><?php echo $lastgame_played->score_home; ?></h3></td>
+						<td style="background-color:#cfc;">
+							<?php foreach( $visitor_team as $key => $player_name ) : ?>
+								<div><?php echo $player_name; ?></div>
+							<?php endforeach; ?>
+						</td>
+						<td style="background-color:#cfc;"><h3><?php echo $lastgame_played->score_visitor; ?></h3></td>
+					</tr>
+                    <tr><td></td></tr>
+				</tbody>
+
+				<thead>
+					<tr>
+						<th colspan="4" align="right" style="text-align:center;">All Games</th>
 					</tr>
 				</thead>
 				<tbody>
 						<tr>
-                            <td>Games played</td>
-                            <td style="text-align:right;"><?php echo sizeof( Game::model()->findAll() ); ?></td>
+                            <td colspan="2">Games played</td>
+                            <td colspan="2" style="text-align:right;"><?php echo sizeof( Game::model()->findAll() ); ?></td>
 						</tr>
                         <tr>
-                            <td>Last game</td>
-                            <td style="text-align:right;">
+                            <td colspan="2">Last game on</td>
+                            <td colspan="2" style="text-align:right;">
                                 <?php 
-                                    $lastgame_played = Game::model()->find( 'created <> 0 ORDER BY created DESC' )->created; 
-                                    echo $lastgame_played || 1==1 ? date( 'F, d', time() + $lastgame_played ) : 'n/a';
+                                    echo $lastgame_played ? str_replace( '_', '&nbsp;',date( 'F,_d', $lastgame_played->created ) ) : 'n/a';
                                 ?>
                             </td>
                         </tr>
@@ -70,17 +92,17 @@
 				</tbody>
 				<thead>
 					<tr>
-						<th colspan="2" align="right" style="text-align:center;">Players</th>
+						<th colspan="4" align="right" style="text-align:center;">Players</th>
 					</tr>
 				</thead>
                 <tbody>
                         <tr>
-                            <td>Number of Players</td>
-                            <td style="text-align:right;"><?php echo sizeof( Player::model()->findAll( 'created<>0' ) ); ?></td>
+                            <td colspan="2">Numbe of Players</td>
+                            <td colspan="2" style="text-align:right;"><?php echo sizeof( Player::model()->findAll( 'created<>0' ) ); ?></td>
                         </tr>
                         <tr>
-                            <td>Home Score (Sum)</td>
-                            <td style="text-align:right;">
+                            <td colspan="2">Home Score (Sum)</td>
+                            <td colspan="2" style="text-align:right;">
                                 <?php // echo (int)Game::model()->with('homeScore')->findAll()->homeScore; 
                                     // TODO make this better, Yii like :/
                                     $score = 0;
@@ -93,8 +115,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Visitor Score (Sum)</td>
-                            <td style="text-align:right;">
+                            <td colspan="2">Visitor Score (Sum)</td>
+                            <td colspan="2" style="text-align:right;">
                                 <?php
                                     //echo Game::model()->with('visitorScore')->findAll()->visitorScore;
                                     $score = 0;
