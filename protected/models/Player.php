@@ -136,4 +136,29 @@ class Player extends CActiveRecord
         return $retval;
         // code...
     }
+
+    /**
+     *
+     */
+    public function findPlayersFromArray( $playerIDs )
+    {
+        // we need an array of player IDs
+        if( ! is_array( $playerIDs ) )
+        {
+            return null;
+        }
+
+        $retval = array();
+
+        foreach( $playerIDs as $playerID )
+        {
+            $player = Player::model()->findByPk( $playerID );
+            if( $player )
+            {
+                $retval[] = $player;
+            }
+        }
+
+        return $retval;
+    }
 }

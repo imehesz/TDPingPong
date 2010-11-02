@@ -27,7 +27,7 @@ class GameController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view', 'list'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -173,4 +173,10 @@ class GameController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+    public function actionList()
+    {
+        $games = Game::model()->findAll( array( 'order' => 'id DESC' ) );
+        $this->render( 'list', array( 'games' => $games ) );
+    }
 }
