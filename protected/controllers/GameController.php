@@ -176,7 +176,19 @@ class GameController extends Controller
 
     public function actionList()
     {
-        $games = Game::model()->findAll( array( 'order' => 'id DESC' ) );
-        $this->render( 'list', array( 'games' => $games ) );
+        // $games = Game::model()->findAll( array( 'order' => 'id DESC' ) );
+        // $this->render( 'list', array( 'games' => $games ) );
+
+        $dataProvider=new CActiveDataProvider(
+												'Game', 
+												array( 
+													'criteria' => array( 'order' => 'created DESC' ),
+													'pagination' => array( 'pageSize' => 12 ) 
+												));
+       
+		$this->render('list',array(
+			'dataProvider'=>$dataProvider,
+		));
+       
     }
 }
