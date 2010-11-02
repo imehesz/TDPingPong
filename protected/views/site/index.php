@@ -28,7 +28,7 @@
 						<th colspan="4" align="center" style="text-align:center;">Top 10</th>
 					</tr>
 					<tr>
-						<th>Pos.</th>
+						<th>#</th>
 						<th>Name</th>
 						<th colspan="2">Wins</th>
 					</tr>
