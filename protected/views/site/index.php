@@ -1,5 +1,7 @@
 <?php $this->pageTitle=Yii::app()->name; ?>
 
+<?php Yii::app()->clientScript->registerScriptFile('js/jtip.js');?>
+
 <h1>Welcome to the <i><?php echo CHtml::encode(Yii::app()->name); ?></i> site.</h1>
 
 <div class="front-top-block">
@@ -13,7 +15,8 @@
 
 <div class="front-top-block">
 	<h3 class="text-center">Photos</h3>
-	<?php echo CHtml::link( CHtml::image( 'http://www.goldbamboo.com/images/content/9488-400px-tt-table-table-tennis.gif' ), 'http://en.wikipedia.org/wiki/Table_tennis', array( 'title' => 'Daddy, what is Table Tennis?', 'target' => '_blank' ) ); ?>
+	<?php // echo CHtml::link( CHtml::image( 'http://www.goldbamboo.com/images/content/9488-400px-tt-table-table-tennis.gif' ), 'http://en.wikipedia.org/wiki/Table_tennis', array( 'title' => 'Daddy, what is Table Tennis?', 'target' => '_blank' ) ); ?>
+<embed pluginspage = "http://www.macromedia.com/go/getflashplayer" wmode="transparent" src="http://picasaweb.google.com/s/c/bin/slideshow.swf" flashvars="host=picasaweb.google.com&amp;RGB=0x000000&amp;feed=http%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2F109851237292211612498%2Falbumid%2F5535339837096495953%3Fkind%3Dphoto%26alt%3Drss" type ="application/x-shockwave-flash" height ="325" width="400"></embed><br /><font size = "1"><a href="http://www.tools4noobs.com/picasa/">Made with Slideshow Embed Tool</a></font> 
 </div>
 
 <div style="clear:both;"></div>
@@ -43,11 +46,11 @@
                                 <?php 
                                     if( $pos > 3 )
                                     {
-                                        echo $player->won > 0 ? $player->won : 0; 
+                                        echo $player->won > 0 ? $player->won : '<span style="color:red;" title="lost games">' . $player->lost . '</span>';
                                     }
                                     else
                                     {
-                                        echo $player->won > 0 ? '<span style="font-weight:bolder;">' . $player->won . '</span>' : 0; 
+                                        echo $player->won > 0 ? '<span style="font-weight:bolder;">' . $player->won . '</span>' : '<span style="color:red;" title="lost games">' . $player->lost . '</span>'; 
                                     }
                                 ?>
                             </td>

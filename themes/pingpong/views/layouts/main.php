@@ -15,6 +15,8 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/form.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/table.css" />
 
+    <?php Yii::app()->clientScript->registerCoreScript('jquery'); ?>
+
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
