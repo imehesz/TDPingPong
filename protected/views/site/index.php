@@ -1,6 +1,7 @@
 <?php $this->pageTitle=Yii::app()->name; ?>
 
 <?php Yii::app()->clientScript->registerScriptFile('js/jtip.js');?>
+<?php Yii::app()->clientScript->registerCssFile('css/jtip.css');?>
 
 <h1>Welcome to the <i><?php echo CHtml::encode(Yii::app()->name); ?></i> site.</h1>
 
@@ -114,7 +115,7 @@
 				</thead>
                 <tbody>
                         <tr>
-                            <td colspan="2">Numbe of Players</td>
+                            <td colspan="2">Number of Players</td>
                             <td colspan="2" style="text-align:right;"><?php echo sizeof( Player::model()->findAll( 'created<>0' ) ); ?></td>
                         </tr>
                         <tr>
