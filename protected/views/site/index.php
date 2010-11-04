@@ -1,17 +1,53 @@
 <?php $this->pageTitle=Yii::app()->name; ?>
 
-<?php Yii::app()->clientScript->registerScriptFile('js/jtip.js');?>
-<?php Yii::app()->clientScript->registerCssFile('css/jtip.css');?>
+<?php Yii::app()->clientScript->registerScriptFile('js/bubble.min.js');?>
+<?php Yii::app()->clientScript->registerCssFile('css/bubble.css');?>
+
+<script type="text/javascript">
+
+<!--
+
+$(document).ready(function(){
+	//create a bubble popup for each DOM element with class attribute as "text", "button" or "link" and LI, P, IMG elements.  
+	$('.tooltip' ).CreateBubblePopup({
+		position : 'right',
+		align	 : 'center',
+		innerHtml: 'loading ...',
+		innerHtmlStyle: {
+			color:'#FFFFFF', 
+			'text-align':'left'
+		},
+		themeName: 	'all-black',
+		themePath: 	'images/'
+	});
+
+	$('.tooltip').mouseover(function(){
+		//get a reference object for "this" target element
+		var tooltip = $(this);
+		
+		// what's the ID of this element
+		elementID = tooltip[0]['id'];
+
+		if( elementID.length > 0 )
+		{
+			stuff = $('#hidden_' + elementID )[0]['innerHTML'];
+			tooltip.SetBubblePopupInnerHtml( stuff );
+		}
+	});
+});
+//-->
+</script>
 
 <h1>Welcome to the <i><?php echo CHtml::encode(Yii::app()->name); ?></i> site.</h1>
 
 <div class="front-top-block">
 	<h3 class="text-center">Hello</h3>
-	<p>This site was developed to track the never ending <strong>ping-pong</strong> war between <a href="http://tampadigital.com" target="_blank" title="Tampa Digiatal - Let's Think Together">Tampa Digiatal</a> employees. Everything else is pretty self explanitaritory :)</p>
+	<p>This site was developed to track the never ending <strong>ping-pong</strong> war between <a href="http://tampadigital.com" target="_blank" title="Tampa Digiatal - Let's Think Together">Tampa Digiatal</a> employees. Everything else is pretty self explanatory :)</p>
 	<p>
-		If you are en employee, just get a <a href="http://en.wikipedia.org/wiki/Table_tennis_racket" target="_blank">paddle</a> and <strong>join the fun</strong>!
+		If you are en employee, just get a <a href="http://en.wikipedia.org/wiki/Table_tennis_racket" target="_blank">paddle</a> and <strong>join the fun</strong>! 
 	</p>
 	<p>Thanks for checking us out!</p>
+	<span style="font-size:11px;float:right;">* M-F, after 5:30pm</span>
 </div>
 
 <div class="front-top-block">
@@ -42,7 +78,16 @@
 					<?php $pos=1; foreach( $top10 as $player ) : ?>
 						<tr>
 							<td><?php echo $pos > 3 ? $pos : '<span style="font-weight:bolder;">' . $pos  . '</span>'; ?>. </td>
-							<td><?php echo $pos > 3 ? $player->name : "<span style='font-weight:bolder;'>{$player->name}</span>"; ?></td>
+							<td class="tooltip" id="td_<?php echo $player->id; ?>">
+								<div id="hidden_td_<?php echo $player->id; ?>" style="display:none;">
+									<strong>Name: </strong><?php echo $player->name; ?><br />
+									<strong>Ranked: </strong><?php echo $pos; ?><br /><br />
+									<strong>Games Played: </strong><?php echo (int)($player->won + $player->lost ); ?><br />
+									<strong>Games Won: </strong><?php echo (int)($player->won ); ?><br />
+									<strong>Games Lost: </strong><?php echo (int)($player->lost ); ?><br /><br />
+									<strong>Over All: </strong><?php echo round(($player->won / ($player->won+$player->lost))*100 ) . '%'; ?><br />
+								</div>
+								<?php echo $pos > 3 ? $player->name : "<span style='font-weight:bolder;'>{$player->name}</span>"; ?></td>
 							<td align="right" style="text-align:right;">
                                 <?php 
                                     if( $pos > 3 )
