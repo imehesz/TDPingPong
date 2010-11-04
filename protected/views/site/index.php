@@ -85,7 +85,7 @@ $(document).ready(function(){
 									<strong>Games Played: </strong><?php echo (int)($player->won + $player->lost ); ?><br />
 									<strong>Games Won: </strong><?php echo (int)($player->won ); ?><br />
 									<strong>Games Lost: </strong><?php echo (int)($player->lost ); ?><br /><br />
-									<strong>Over All: </strong><?php echo round(($player->won / ($player->won+$player->lost))*100 ) . '%'; ?><br />
+									<strong>Over All: </strong><?php echo $player->won > 0 || $player->lost > 0 ? round(($player->won / ($player->won+$player->lost))*100 ) . '%' : 'n/a'; ?><br />
 								</div>
 								<?php echo $pos > 3 ? $player->name : "<span style='font-weight:bolder;'>{$player->name}</span>"; ?></td>
 							<td align="right" style="text-align:right;">
