@@ -1,7 +1,7 @@
 <?php $this->pageTitle=Yii::app()->name; ?>
 
-<?php Yii::app()->clientScript->registerScriptFile('js/bubble.min.js');?>
-<?php Yii::app()->clientScript->registerCssFile('css/bubble.css');?>
+<?php Yii::app()->clientScript->registerScriptFile( Yii::app()->request->baseUrl . '/js/bubble.min.js');?>
+<?php Yii::app()->clientScript->registerCssFile( Yii::app()->request->baseUrl . '/css/bubble.css');?>
 
 <script type="text/javascript">
 
@@ -80,12 +80,19 @@ $(document).ready(function(){
 							<td><?php echo $pos > 3 ? $pos : '<span style="font-weight:bolder;">' . $pos  . '</span>'; ?>. </td>
 							<td class="tooltip" id="td_<?php echo $player->id; ?>">
 								<div id="hidden_td_<?php echo $player->id; ?>" style="display:none;">
-									<strong>Name: </strong><?php echo $player->name; ?><br />
-									<strong>Ranked: </strong><?php echo $pos; ?><br /><br />
-									<strong>Games Played: </strong><?php echo (int)($player->won + $player->lost ); ?><br />
-									<strong>Games Won: </strong><?php echo (int)($player->won ); ?><br />
-									<strong>Games Lost: </strong><?php echo (int)($player->lost ); ?><br /><br />
-									<strong>Over All: </strong><?php echo $player->won > 0 || $player->lost > 0 ? round(($player->won / ($player->won+$player->lost))*100 ) . '%' : 'n/a'; ?><br />
+									<table>
+										<tr>
+											<td>
+												<strong>Name: </strong><?php echo strtoupper($player->name); ?>&nbsp;<br />
+												<strong>Ranked: </strong><?php echo $pos; ?><br /><br />
+												<strong>Games Played: </strong><?php echo (int)($player->won + $player->lost ); ?><br />
+												<strong>Games Won: </strong><?php echo (int)($player->won ); ?><br />
+												<strong>Games Lost: </strong><?php echo (int)($player->lost ); ?><br /><br />
+												<strong>Over All: </strong><?php echo $player->won > 0 || $player->lost > 0 ? round(($player->won / ($player->won+$player->lost))*100 ) . '%' : 'n/a'; ?><br />
+											</td>
+											<td><img src="<?php echo Yii::app()->request->baseUrl;?>/images/geisha.jpg" /></td>
+										</tr>
+									</table>
 								</div>
 								<?php echo $pos > 3 ? $player->name : "<span style='font-weight:bolder;'>{$player->name}</span>"; ?></td>
 							<td align="right" style="text-align:right;">
