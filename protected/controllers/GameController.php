@@ -72,6 +72,12 @@ class GameController extends Controller
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
+		else
+		{
+			// setting the default score to 11
+			$model->score_home 		= 11;
+			$model->score_visitor 	= 11;
+		}
 
 		$this->render('create',array(
 			'model'=>$model,

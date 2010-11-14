@@ -26,7 +26,8 @@
 
 		<div class="row">
 			<?php echo $form->labelEx($model,'score_home'); ?>
-			<?php echo $form->textField($model,'score_home', array( 'value' => (int)$model->score_home ) ); ?>
+			<?php // echo $form->textField($model,'score_home', array( 'value' => (int)$model->score_home ) ); ?>
+			<?php echo $form->dropDownList($model,'score_home', range(0,30) ); ?>
 			<?php echo $form->error($model,'score_home'); ?>
 		</div>
 	</fieldset>
@@ -42,7 +43,8 @@
 		</div>
 		<div class="row">
 			<?php echo $form->labelEx($model,'score_visitor'); ?>
-			<?php echo $form->textField($model,'score_visitor', array( 'value' => (int)$model->score_visitor ) ); ?>
+			<?php // echo $form->textField($model,'score_visitor', array( 'value' => (int)$model->score_visitor ) ); ?>
+			<?php echo $form->dropDownList($model,'score_visitor', range(0,30) ); ?>
 			<?php echo $form->error($model,'score_visitor'); ?>
 		</div>
 	</fieldset>

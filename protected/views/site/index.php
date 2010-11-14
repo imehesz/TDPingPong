@@ -44,7 +44,7 @@ $(document).ready(function(){
 	<h3 class="text-center">Hello</h3>
 	<p>This site was developed to track the never ending <strong>ping-pong</strong> war between <a href="http://tampadigital.com" target="_blank" title="Tampa Digital - Let's Think Together">Tampa Digital</a> employees. Everything else is pretty self explanatory :)</p>
 	<p>
-		If you are en employee, just get a <a href="http://en.wikipedia.org/wiki/Table_tennis_racket" target="_blank">paddle</a> and <strong>join the fun</strong>! 
+		If you are an employee, just get a <a href="http://en.wikipedia.org/wiki/Table_tennis_racket" target="_blank">paddle</a> and <strong>join the fun</strong>! 
 	</p>
 	<p>Thanks for checking us out!</p>
 	<span style="font-size:11px;float:right;">* M-F, after 5:30pm</span>

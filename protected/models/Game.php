@@ -44,7 +44,7 @@ class Game extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array( 'name', 'required' ),
+			//array( 'name', 'required' ),
 			array('score_home, score_visitor, created', 'numerical', 'integerOnly'=>true),
 			array('name, players_home, players_visitor', 'length', 'max'=>255),
 			array('details', 'safe'),
